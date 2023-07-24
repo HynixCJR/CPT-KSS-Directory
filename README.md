@@ -48,8 +48,63 @@ More information on the format of the messages can be seen in the user guide [he
 
 ### Setting up the Discord bot
 
-To get the Discord bot to run, you first need to install [Python](https://www.python.org/downloads/) and [discord.py](https://discordpy.readthedocs.io/en/stable/intro.html#installing).
+To get the Discord bot to run, you first need to install [Python](https://www.python.org/downloads/) and [discord.py](https://discordpy.readthedocs.io/en/stable/intro.html#installing), if you have not done so already.
 
-The main file for the Discord bot is called [KSSDr_bot.py](docs/Bot and Web Server/KSSDr_bot.py)
+The main file for the Discord bot is called [KSSDr_bot.py](/Bot%20and%20Web%20Server/KSSDr_bot.py)
 
-Unfortunately, the code for the Discord bot provided in this repository does not have the token that is required for the bot to function. It has been removed for security purposes. However, if you'd like to run the code yourself, you can follow [this guide](https://discordpy.readthedocs.io/en/stable/discord.html) to get your own token. Replace 
+Unfortunately, the code for the Discord bot provided in this repository does not have the token that is required for the bot to function. It has been removed for security purposes. However, if you'd like to run the code yourself, you can follow [this guide](https://discordpy.readthedocs.io/en/stable/discord.html) to get your own token. Replace ```token``` in the last line of KSSDr_bot.py with your token.
+
+```python
+client.run('token')
+```
+
+The bot also references a file in the same directory called [bot_configs.py](/Bot%20and%20Web%20Server/bot_configs.py), which stores a lot of the configuration information for the Discord server. The ones that are likely to be most useful to change are lines in lines 1-11. Change these channel IDs to the IDs of the server you wish to implement this in.
+```python
+# anceChnl is the channel ID of the announcements channel
+# i.e., where the actual announcements are sent
+anceChnl = 1131051934703435886
+
+# rolesChnl is the channel ID of the roles assignment channel
+# i.e., where the role names and categories are set.
+rolesChnl = 1131052452280533112
+
+# debugChnl is the channel ID of the debug channel
+# i.e., where the bot sends debug messages, e.g., confirmation messages
+debugChnl = 1131051854634164284
+```
+
+To start the bot, simply run [KSSDr_bot.py](/Bot%20and%20Web%20Server/KSSDr_bot.py).
+
+
+## Web server
+
+The web server mainly accepts various HTTP requests sent by the front-end, returning the JSON files requested. It sorts through the JSON files that are created by the [Discord bot](/Bot%20and%20Web%20Server/KSSDr_bot.py) in the [announcements](/Bot%20and%20Web%20Server/announcements) directory, and returns the JSON files that are requested by the front-end.
+
+### Setting up the web server
+
+To get the web server to run, you first need to install [Python](https://www.python.org/downloads/) and [FastAPI](https://fastapi.tiangolo.com/tutorial/#install-fastapi), if you have not done so already.
+
+In the [Bot and Web Server](/Bot%20and%20Web%20Server) directory, run the following command in the terminal. This will start the server locally.
+```python
+uvicorn main:app --reload
+```
+More setup instructions can be found [here](https://fastapi.tiangolo.com/tutorial/#run-the-code).
+
+
+## Front-end
+
+The front-end is coded in NextJS. It parses through the JSON files returned by HTTP requests sent to the web server, and renders them in a specific format to the client.
+
+### Setting up the front-end
+
+To get the front-end to run locally, run the following command in the terminal in the [Front-end](Front-end) directory.
+
+```javascript
+npm run dev
+```
+Note that this will only work if there are already announcements in the [announcements](/Bot%20and%20Web%20Server/announcements) directory, and if the web server is online and functional.
+
+## More information
+
+The bot and web server that are currently in use for the [KSS Directory website](https://kssdirectory.vercel.app/) are hosted on Google Cloud, whereas the front-end itself is hosted by [Vercel](https://vercel.com).
+This project was coded by Matthew Kong with zero prior experience in NextJS, React, Javascript, discord.py, and FastAPI.
