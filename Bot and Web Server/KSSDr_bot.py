@@ -274,4 +274,4 @@ async def on_message(message):
 # This is the client ID of the Discord bot
 # This is supposed to be confidential...
 # So I've removed it. You can get your own and paste it here. :)
-client.run('key')
+client.run('token')

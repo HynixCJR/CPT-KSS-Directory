@@ -33,7 +33,7 @@ class openAnce():
         # Also returns if that index is the last one or not
         # I also call this "batches" in my comments elsewhere
         ances = {}
-        all_ance = glob.glob("announcements/*.json")
+        all_ance = sorted(glob.glob("announcements/*.json"))
         for i in range(len(all_ance) - num * (index), 0, -1):
             if len(ances) == num:
                 break
