@@ -1,3 +1,5 @@
+# This is the old repo, meant for my ICS4U final project! Please see [this repo](https://github.com/HynixCJR/KSS-Directory-Website-Public) for the updated code.
+
 # CPT-KSS-Directory
 
 Website link: https://kssdirectory.vercel.app/
